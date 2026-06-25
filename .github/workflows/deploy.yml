@@ -28,11 +28,11 @@ jobs:
           ECR_REPOSITORY: despachos-backend
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./Springboot-API-REST-DESPACHO
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
       - name: Force new deployment
         run: |
-          aws ecs update-service --cluster despachos-cluster --service backend-service --force-new-deployment
+          aws ecs update-service --cluster despacho-cluster --service backend-service --force-new-deployment
